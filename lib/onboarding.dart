@@ -29,9 +29,7 @@ class Onboarding extends StatelessWidget {
                 Text(
                   " Mi función es ayudarte proporcionando información, respondiendo preguntas y ofreciendo asistencia en una variedad de temas. Puedo conversar contigo, proporcionarte explicaciones, sugerencias y más, todo basado en el conocimiento y patrones aprendidos durante mi entrenamiento.",
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 16,
-                      color: Theme.of(context).textTheme.bodyLarge.),
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
               ],
             ),

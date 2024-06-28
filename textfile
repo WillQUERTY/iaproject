@@ -1,0 +1,10 @@
+      if(_controller.text.isNotEmpty){
+        final response = await GoogleGenerativeAI.generateText(
+          prompt: _controller.text,
+          model: Model.davinci,
+          maxTokens: 100,
+          temperature: 0.5,
+          topP: 1,
+          frequencyPenalty: 0,
+          presencePenalty: 0,
+          stop: ["\n"]
