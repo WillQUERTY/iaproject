@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:iaproject/message.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -22,27 +23,33 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
         appBar: AppBar(
           centerTitle: false,
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).colorScheme.background,
+          elevation: 1,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
-                  Image.asset('assets/gpt-robot.png'),
+                  Image.asset(
+                    'assets/gpt-robot.png',
+                  ),
                   SizedBox(
                     width: 10,
                   ),
                   Text(
                     "Gemini Gpt",
-                    style: TextStyle(color: Colors.black),
+                    style: Theme.of(context).textTheme.titleLarge,
                   )
                 ],
               ),
-              Image.asset(
-                "assets/volumen-hight.png",
-                color: Colors.blue[800],
+              GestureDetector(
+                child: Image.asset(
+                  "assets/volumen-hight.png",
+                  color: Colors.blue[800],
+                ),
               )
             ],
           ),
@@ -64,8 +71,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             padding: EdgeInsets.all(10),
                             decoration: BoxDecoration(
                                 color: message.isUser
-                                    ? Colors.blue
-                                    : Colors.grey[300],
+                                    ? Theme.of(context).colorScheme.primary
+                                    : Theme.of(context).colorScheme.secondary,
                                 borderRadius: message.isUser
                                     ? BorderRadius.only(
                                         topLeft: Radius.circular(20),
@@ -75,13 +82,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                         topRight: Radius.circular(20),
                                         bottomRight: Radius.circular(20),
                                         bottomLeft: Radius.circular(20))),
-                            child: Text(
-                              message.text,
-                              style: TextStyle(
-                                  color: message.isUser
-                                      ? Colors.white
-                                      : Colors.black),
-                            )),
+                            child: Text(message.text,
+                                style: message.isUser
+                                    ? Theme.of(context).textTheme.bodyMedium
+                                    : Theme.of(context).textTheme.bodySmall)),
                       ),
                     );
                   }),
@@ -96,8 +100,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       boxShadow: [
                         BoxShadow(
                             color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 5,
-                            blurRadius: 7,
+                            spreadRadius: 3,
+                            blurRadius: 3,
                             offset: Offset(0, 3))
                       ]),
                   child: Row(
@@ -105,8 +109,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       Expanded(
                         child: TextField(
                           controller: _controller,
+                          style: Theme.of(context).textTheme.titleSmall,
                           decoration: InputDecoration(
                               hintText: "Type a message",
+                              hintStyle: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(),
                               border: InputBorder.none,
                               contentPadding:
                                   EdgeInsets.symmetric(horizontal: 20)),
